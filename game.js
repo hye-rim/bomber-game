@@ -637,8 +637,8 @@ function showMenu() {
     <p>폭탄으로 상자를 부수고 <b>적을 모두 없앤 뒤</b><br>숨어 있는 출구로 탈출해요!</p>
     <button data-act="again">시작하기</button>
     <div class="card">
-      🕹️ 방향 버튼으로 이동, 💣 버튼으로 폭탄 놓기<br>
-      ⌨️ 방향키 / WASD 이동 · Space 폭탄<br>
+      <span class="touch">🕹️ 방향 버튼으로 이동, 💣 버튼으로 폭탄 놓기<br></span>
+      <span class="pc">⌨️ 방향키 / WASD 이동 · Space 폭탄<br></span>
       💥 폭발은 <b>내가 맞아도</b> 아파요! 놓고 도망쳐요<br>
       📦 판마다 폭탄 개수가 정해져 있어요 (상자 속 💣 +1)<br>
       ⚡ 빨리 깰수록, 목숨·폭탄을 아낄수록 높은 점수

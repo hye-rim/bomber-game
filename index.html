@@ -85,6 +85,9 @@
     #overlay .card { font-size:12px; padding:7px 12px; line-height:1.6; }
     #overlay button { font-size:19px; padding:8px 32px; }
   }
+  /* 기기에 맞는 설명만: 폰(손가락)은 .touch, PC(마우스·키보드)는 .pc */
+  .pc { display:none; }
+  @media (pointer:fine) { .pc { display:inline; } .touch { display:none; } }
 </style>
 </head>
 <body>
