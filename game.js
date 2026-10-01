@@ -735,6 +735,7 @@ showMenu();
 fit();
 requestAnimationFrame(frame);
 
+/* @test-hooks:start */
 // 테스트용
 window.__bm = {
   get state() { return state; }, get level() { return level; }, get score() { return score; }, get lives() { return lives; }, get stock() { return stock; },
@@ -742,4 +743,5 @@ window.__bm = {
   get g() { return g; }, get items() { return items; }, get exit() { return exit; }, get n() { return n; }, get time() { return time; }, get kills() { return kills; },
   placeBomb, newLevel, startRun, press, release, exitOpen, killEnemy, hitPlayer, win, explode, showMenu, update,
 };
+/* @test-hooks:end */
 })();
