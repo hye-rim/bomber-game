@@ -33,7 +33,7 @@ function fit() {
   const hudH = 62;
   const scale = Math.min((innerWidth - 24) / W, (innerHeight - 28 - hudH) / H);
   const cssW = Math.floor(W * scale), cssH = Math.floor(H * scale);
-  const dpr = window.devicePixelRatio || 1;
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
   canvas.style.width = cssW + 'px';
   canvas.style.height = cssH + 'px';
   canvas.width = Math.round(cssW * dpr);
