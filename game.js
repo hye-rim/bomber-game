@@ -680,8 +680,10 @@ canvas.addEventListener('pointerdown', (e) => {
   if (state !== 'play') return;
   const p = toLogical(e);
   const d = padDirAt(p);
-  if (d >= 0) { canvas.setPointerCapture(e.pointerId); press('p' + e.pointerId, d); return; }
-  if (inBomb(p)) { canvas.setPointerCapture(e.pointerId); bombPointers.add(e.pointerId); bombPressed = true; placeBomb(); return; }
+  // 손가락이 이미 떨어졌으면 setPointerCapture 가 예외를 던져 이동이 씹힌다: 감싼다
+  const capture = () => { try { canvas.setPointerCapture(e.pointerId); } catch (_) {} };
+  if (d >= 0) { capture(); press('p' + e.pointerId, d); return; }
+  if (inBomb(p)) { capture(); bombPointers.add(e.pointerId); bombPressed = true; placeBomb(); return; }
   if (inRestart(p)) newLevel(level, true);
 });
 canvas.addEventListener('pointermove', (e) => {
