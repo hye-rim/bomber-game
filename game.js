@@ -1,4 +1,6 @@
 'use strict';
+// 오락실 튜토리얼이 '진짜로 일어난 일'을 알아채는 신호 (arcade/public/tutorial.js 가 듣는다. 튜토리얼이 아니면 아무도 안 듣는다)
+const tutorialSignal = (type) => window.dispatchEvent(new CustomEvent('arcade:tutorial', { detail: { type } }));
 
 // 봄버 미로: 화면·입력·흐름. 판 규칙은 logic.js (LOGIC) 에 있다.
 (() => {
@@ -180,6 +182,7 @@ function placeBomb() {
   stock--;
   bombs.push({ x, y, t: spec.fuse, range, solid: false });
   sfx.put();
+  tutorialSignal('bomb');
   updateHud();
 }
 
