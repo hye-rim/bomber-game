@@ -1,6 +1,12 @@
 'use strict';
 // 오락실 튜토리얼이 '진짜로 일어난 일'을 알아채는 신호 (arcade/public/tutorial.js 가 듣는다. 튜토리얼이 아니면 아무도 안 듣는다)
 const tutorialSignal = (type) => window.dispatchEvent(new CustomEvent('arcade:tutorial', { detail: { type } }));
+// 움직임 신호: 위치가 바뀐 거리가 step 이상 쌓일 때마다 'move' (방향키·터치·마우스로 실제로 움직였는지)
+let tutorialLast = null, tutorialDist = 0;
+function tutorialMoved(x, y, step) {
+  if (tutorialLast) { tutorialDist += Math.abs(x - tutorialLast[0]) + Math.abs(y - tutorialLast[1]); if (tutorialDist >= step) { tutorialDist = 0; tutorialSignal('move'); } }
+  tutorialLast = [x, y];
+}
 
 // 봄버 미로: 화면·입력·흐름. 판 규칙은 logic.js (LOGIC) 에 있다.
 (() => {
@@ -289,6 +295,7 @@ function gameOver() {
 // ---------- 갱신 ----------
 function update(dt) {
   clock += dt;
+  if (state === 'play') tutorialMoved(player.x, player.y, 1);
   if (state === 'play' || state === 'won') tickWorld(dt);
   shake = Math.max(0, shake - dt);
   for (const p of particles) { p.life -= dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vy += 420 * dt; }
